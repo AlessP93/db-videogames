@@ -1,4 +1,6 @@
-﻿--1- Selezionare tutte le software house americane (3)
+﻿----------------------------- Query su singola tabella
+
+--1- Selezionare tutte le software house americane (3)
 --SELECT *
 --FROM software_houses
 --where country = 'United States';
@@ -43,12 +45,16 @@
 --FROM videogames
 --where YEAR(release_date) = 2020;
 
---10- Selezionare gli id dei videogame che hanno ricevuto almeno una recensione da stelle, mostrandoli una sola volta (443)
+--10- Selezionare gli id dei videogame che hanno ricevuto almeno una recensione da 5 stelle, mostrandoli una sola volta (443)
 --SELECT DISTINCT videogame_id
 --FROM reviews
 --where rating = 5;
 
---Query con group by
+--11- Selezionare il numero e la media delle recensioni per il videogioco con ID = 412 (review number = 12, avg_rating = 3)
+--select count(*) as media, avg(rating) 
+--from vide
+--------------------------------- Query con group by
+
 --1- Contare quante software house ci sono per ogni paese (3)
 --SELECT COUNT(id), country
 --FROM software_houses
@@ -65,6 +71,34 @@
 --GROUP BY pegi_label_id
 
 --4- Mostrare il numero di videogiochi rilasciati ogni anno (11)
-SELECT COUNT(id)
-FROM videogames
-GROUP BY release_date
+--SELECT COUNT(id)
+--FROM videogames
+--GROUP BY YEAR(release_date)
+
+--5- Contare quanti videogiochi sono disponbiili per ciascun device (del device vogliamo solo l'ID) (7)
+--SELECT COUNT(id)
+--FROM device_videogame
+--GROUP BY device_id
+
+--6- Ordinare i videogame in base alla media delle recensioni (del videogioco vogliamo solo l'ID) (500)
+--SELECT COUNT(id)
+--FROM reviews
+--GROUP BY videogame_id
+
+------------------------------- Query con join
+
+--1- Selezionare i dati di tutti giocatori che hanno scritto almeno una recensione, mostrandoli una sola volta (996)
+--SELECT DISTINCT player_id
+--FROM reviews
+--INNER JOIN players 
+--ON player_id = reviews.player_id
+
+--2- Sezionare tutti i videogame dei tornei tenuti nel 2016, mostrandoli una sola volta (226)
+SELECT DISTINCT videogame_id
+FROM tournament_videogame
+INNER JOIN tournaments
+
+--9- Selezionare i giocatori che hanno giocato al gioco più atteso del 2018 in un torneo del 2019 (3306)
+--SELECT *
+--FROM players as p
+--INNER JOIN player_tournament as pt ON p.id = pt.player_id
